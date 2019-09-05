@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Videos";
+}
+
+<h2>Videos</h2>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <hr />
+    <div class="container text-success" style="text-align: center;">
+        @ViewBag.Message
+    </div>
+    <br />
+
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4 col-md-4 col-xs-12">
+                <div class="video-frame" style="text-align:center;">
+                    @item.VideoName
+                    <br />
+                    <video style="width:250px; height:150px;" controls>
+                        <source src="@Url.Content(item.VideoPath)" type="video/mp4" />
+                    </video>
+                    <br />
+                    @if (HttpContext.Current.User.Identity.Name == item.VideoAuthor)
+                    {
+                        @:Author: @Html.ActionLink((string)item.VideoAuthor, "ViewMyProfile", "User")
+                    }
+                    else
+                    {
+                        @:Author: @Html.ActionLink((string)item.VideoAuthor, "ViewUserProfile", "User", new { emailID = item.VideoAuthor }, null)
+                    }
+                    <br />
+                    Size: @item.VideoSize MB
+                    <br />
+                    Uploaded: @item.VideoUploadDate
+                    <br />
+                    <div>
+                        @Html.ActionLink("Download", "DownloadVideo", "Video", new { path = item.VideoPath }, null)
+                        &nbsp; &nbsp; &nbsp;
+                        @Html.ActionLink("Hide", "HideVideo", "Video", new { path = item.VideoPath }, null)
+                        &nbsp; &nbsp; &nbsp;
+                        @Html.ActionLink("Delete", "DeleteVideo", "Video", new { path = item.VideoPath }, null)
+                    </div>
+                </div>
+                <br />
+                <br />
+            </div>
+        }
+    </div>
+</body>
+</html>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,30 @@
+﻿@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @using WebVideoPortal.Models;
+                @using (DatabaseEntities de = new DatabaseEntities())
+                {
+                    var user = de.Users.Where(a => a.EmailID == HttpContext.Current.User.Identity.Name).FirstOrDefault();
+                    if (user != null)
+                    {
+                        var name = user.FirstName;
+                        @Html.ActionLink("Hello " + name + "!", "DisplayMyVideos", "Video", routeValues: null, htmlAttributes: new { title = "My Videos" })
+                    }
+                }
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "User", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

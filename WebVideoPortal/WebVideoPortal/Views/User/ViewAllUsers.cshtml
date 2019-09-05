@@ -1,0 +1,118 @@
+﻿@model IEnumerable<WebVideoPortal.Models.User>
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<h2>All Users</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.EmailID)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.IsEmailVerified)
+        </th>
+
+        <td>
+            <b>Videos</b>
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @if ((item.FirstName != "") || (item.FirstName != null))
+                {
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                }
+                else
+                {
+                    @:None
+                }
+            </td>
+
+            <td>
+                @if ((item.LastName != "") || (item.LastName != null))
+                {
+                    @Html.DisplayFor(modelItem => item.LastName)
+                }
+                else
+                {
+                    @:None
+                }
+            </td>
+
+            <td>
+                @if ((item.EmailID != "") || (item.EmailID != null))
+                {
+                    @Html.DisplayFor(modelItem => item.EmailID)
+                }
+                else
+                {
+                    @:None
+                }
+            </td>
+
+            <td>
+                @if (item.DateOfBirth != null)
+                {
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                }
+                else
+                {
+                    @:None
+                }
+            </td>
+
+            <td>
+                @if (item.IsEmailVerified != false)
+                {
+                    @Html.DisplayFor(modelItem => item.IsEmailVerified) @:Yes
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.IsEmailVerified) @:No
+                }
+            </td>
+
+            <td>
+                @if (HttpContext.Current.User.Identity.Name == item.EmailID)
+                {
+                    @Html.ActionLink("Videos", "DisplayMyVideos", "Video")
+                }
+                else
+                {
+                    @Html.ActionLink("Videos", "DisplayUserVideos", "Video", new { emailID = item.EmailID }, null)
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Upload Videos";
+}
+
+<h2>Upload Videos</h2>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <hr />
+    <div class="form-group">
+        <div class="col-md-10">
+            <div class="text-success">
+                @ViewBag.Message
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="container">
+        @using (Html.BeginForm("Upload", "Video", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label>Upload Video Files</label>
+                <div class="input-group">
+                    @Html.TextBox("Files", "", new { type = "file", accept = "video/mp4", multiple = "" }) <br />
+                    <input type="submit" value="Upload Video Files" />
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

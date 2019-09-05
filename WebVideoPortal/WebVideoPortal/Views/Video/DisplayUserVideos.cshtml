@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "User Videos";
+}
+
+@if (ViewBag.User == null)
+{
+    <h2>User Videos</h2>
+}
+else
+{
+    <h2>@Html.ActionLink((string)ViewBag.User.EmailID, "ViewUserProfile", "User", new { emailID = ViewBag.User.EmailID }, null)'s Videos</h2>
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <hr />
+    <div class="container text-success" style="text-align: center;">
+        @ViewBag.Message
+    </div>
+    <br />
+
+    <div class="container">
+        <h2>Public Videos - @ViewBag.PublicVideos</h2>
+        <hr />
+        @foreach (var item in Model)
+        {
+            if (item.IsVideoActive == true)
+            {
+                <div class="col-sm-4 col-md-4 col-xs-12">
+                    <div class="video-frame" style="text-align:center;">
+                        @item.VideoName
+                        <br />
+                        <video style="width:250px; height:150px;" controls>
+                            <source src="@Url.Content(item.VideoPath)" type="video/mp4" />
+                        </video>
+                        <br />
+                        Size: @item.VideoSize MB
+                        <br />
+                        Uploaded: @item.VideoUploadDate
+                        <br />
+                        <div>
+                            @Html.ActionLink("Download", "DownloadVideo", "Video", new { path = item.VideoPath }, null)
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+            }
+        }
+    </div>
+    <br />
+
+    <div class="container">
+        <h2>Private Videos - @ViewBag.PrivateVideos</h2>
+    </div>
+</body>
+</html>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

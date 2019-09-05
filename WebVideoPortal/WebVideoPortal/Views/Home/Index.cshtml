@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@using WebVideoPortal.Models;
+@if (Context.User.Identity.IsAuthenticated)
+{
+    using (DatabaseEntities de = new DatabaseEntities())
+    {
+        var user = de.Users.Where(a => a.EmailID == HttpContext.Current.User.Identity.Name).FirstOrDefault();
+        var name = user.FirstName;
+        <h3>Welcome, @name</h3>
+    }
+    using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+    }
+    <hr />
+}
+else
+{
+    <h3>Welcome</h3>
+    <hr />
+}
+
+<div>
+    <center>
+        <i>
+            I created this website as a university project in my third year studying Informatics at New Bulgarian University.
+            The goal was to replicate all functions of a basic video sharing service.
+        </i>
+    </center>
+</div>
+<br />
+<div>
+    <center>
+        <i>
+            At the top you see the navigation bar with quite a few buttons in it. If you're on mobile then you'll see a sandwich button
+            which, if clicked, would show you all the buttons in a dropdown.
+        </i>
+    </center>
+</div>
+<br />
+<div>
+    <center>
+        <i>
+            While to use the full functionality of the website you need to be registered and logged in, guest users still have the ability
+            to view and download all public videos, view the list with all registered users and their videos and details as well as to view
+            and use the shoutbox feature, which can be found as the next to last option in the navigation bar at the top of the site.
+        </i>
+    </center>
+</div>
+<br />
+<div>
+    <center>
+        <i>
+            All registered and logged in users are allowed to upload mp4 video files of up to 100 MB in size per file. Multiple file upload
+            is also available but the size limit for all selected files to upload is 500 MB. The first rule about any single file still
+            applies here. Only the uploader of a given mp4 video file can delete, hide or unhide it at any given moment in time.
+        </i>
+    </center>
+</div>
+<br />
+<div>
+    <center>
+        <i>
+            In case any of you are wondering how I built this site and what I used, I've put up a special tab in the navigation bar, which
+            contains links to different topics that really helped me during the development of the website. Just remember - never give up!
+            That's the golden rule of programming. There's always a way for everything, you just have to find it :P
+        </i>
+    </center>
+</div>
+<br />
+<div>
+    <center>
+        <i>
+            Understandably, not all features can be covered in this page so I'll just let you explore the website on your own. It's more
+            fun that way too :)
+        </i>
+    </center>
+</div>

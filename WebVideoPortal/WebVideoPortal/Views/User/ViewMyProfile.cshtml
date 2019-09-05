@@ -1,0 +1,133 @@
+﻿@model WebVideoPortal.Models.User
+
+@{
+    ViewBag.Title = "My Profile";
+}
+
+<h2>My Profile</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName):
+        </dt>
+        <dd>
+            @if ((ViewBag.ViewProfileUser.FirstName != "") && (ViewBag.ViewProfileUser.FirstName != null))
+            {
+                @Html.DisplayFor(model => model.FirstName)
+            }
+            else
+            {
+                @:None
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName):
+        </dt>
+        <dd>
+            @if ((ViewBag.ViewProfileUser.LastName != "") && (ViewBag.ViewProfileUser.LastName != null))
+            {
+                @Html.DisplayFor(model => model.LastName)
+            }
+            else
+            {
+                @:None
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailID):
+        </dt>
+        <dd>
+            @if ((ViewBag.ViewProfileUser.EmailID != "") && (ViewBag.ViewProfileUser.EmailID != null))
+            {
+                @Html.DisplayFor(model => model.EmailID)
+            }
+            else
+            {
+                @:None
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth):
+        </dt>
+        <dd>
+            @if (ViewBag.ViewProfileUser.DateOfBirth != null)
+            {
+                @Html.DisplayFor(model => model.DateOfBirth)
+            }
+            else
+            {
+                @:None
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password) Hash:
+        </dt>
+        <dd>
+            @if ((ViewBag.ViewProfileUser.Password != "") && (ViewBag.ViewProfileUser.Password != null))
+            {
+                @Html.DisplayFor(model => model.Password)
+            }
+            else
+            {
+                @:None
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEmailVerified):
+        </dt>
+        <dd>
+            @if (ViewBag.ViewProfileUser.IsEmailVerified != false)
+            {
+                @Html.DisplayFor(model => model.IsEmailVerified) @:Yes
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.IsEmailVerified) @:No
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivationCode):
+        </dt>
+        <dd>
+            @if (ViewBag.ViewProfileUser.ActivationCode != null)
+            {
+                @Html.DisplayFor(model => model.ActivationCode)
+            }
+            else
+            {
+                @:None
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResetPasswordCode):
+        </dt>
+        <dd>
+            @if ((ViewBag.ViewProfileUser.ResetPasswordCode != "") && (ViewBag.ViewProfileUser.ResetPasswordCode != null))
+            {
+                @Html.DisplayFor(model => model.ResetPasswordCode)
+            }
+            else
+            {
+                @:None
+            }
+        </dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit Profile", "EditProfile", "User")
+</p>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

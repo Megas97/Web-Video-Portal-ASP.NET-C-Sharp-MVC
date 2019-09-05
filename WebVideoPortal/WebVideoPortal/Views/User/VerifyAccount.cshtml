@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Verify Account";
+}
+
+<h2>Verify Account</h2>
+
+@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+{
+    <div class="alert alert-success">
+        <strong>Success! </strong>Your account has been verified successfully. Click @Html.ActionLink("here", "Login", "User") to log in
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Error! </strong>@ViewBag.Message
+    </div>
+}
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
